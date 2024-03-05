@@ -1,0 +1,1321 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 100%;
+            height: 100vh; /* 使用视窗高度作为高度 */
+            margin: 0;
+            padding: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/_1.js"></script>
+        <script src="data/_2.js"></script>
+        <script src="data/_3.js"></script>
+        <script src="data/_4.js"></script>
+        <script src="data/_5.js"></script>
+        <script src="data/_6.js"></script>
+        <script src="data/_7.js"></script>
+        <script src="data/_8.js"></script>
+        <script src="data/_9.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[28.273004275091825,104.60481722007934],[31.152244675181063,109.80326801745576]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane__0');
+        map.getPane('pane__0').style.zIndex = 400;
+        var layer__0 = L.tileLayer('https://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+            pane: 'pane__0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer__0;
+        map.addLayer(layer__0);
+        function pop__1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['site'] !== null ? autolinker.link(feature.properties['site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__1_0() {
+            return {
+                pane: 'pane__1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,191,111,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane__1');
+        map.getPane('pane__1').style.zIndex = 401;
+        map.getPane('pane__1').style['mix-blend-mode'] = 'normal';
+        var layer__1 = new L.geoJson(json__1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json__1',
+            layerName: 'layer__1',
+            pane: 'pane__1',
+            onEachFeature: pop__1,
+            style: style__1_0,
+        });
+        bounds_group.addLayer(layer__1);
+        map.addLayer(layer__1);
+        function pop__2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['full_id'] !== null ? autolinker.link(feature.properties['full_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_id'] !== null ? autolinker.link(feature.properties['osm_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_type'] !== null ? autolinker.link(feature.properties['osm_type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['boundary'] !== null ? autolinker.link(feature.properties['boundary'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['leisure'] !== null ? autolinker.link(feature.properties['leisure'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gns:UNI'] !== null ? autolinker.link(feature.properties['gns:UNI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gns:UFI'] !== null ? autolinker.link(feature.properties['gns:UFI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gns:DSG'] !== null ? autolinker.link(feature.properties['gns:DSG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gns:ADM1'] !== null ? autolinker.link(feature.properties['gns:ADM1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['source:name'] !== null ? autolinker.link(feature.properties['source:name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ast'] !== null ? autolinker.link(feature.properties['name:ast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['old_name:cs'] !== null ? autolinker.link(feature.properties['old_name:cs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sl'] !== null ? autolinker.link(feature.properties['name:sl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sco'] !== null ? autolinker.link(feature.properties['name:sco'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['divison_code'] !== null ? autolinker.link(feature.properties['divison_code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:lt'] !== null ? autolinker.link(feature.properties['official_name:lt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:vep'] !== null ? autolinker.link(feature.properties['name:vep'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:uk'] !== null ? autolinker.link(feature.properties['official_name:uk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:tr'] !== null ? autolinker.link(feature.properties['official_name:tr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:ru'] !== null ? autolinker.link(feature.properties['official_name:ru'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:nl'] !== null ? autolinker.link(feature.properties['official_name:nl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:nan'] !== null ? autolinker.link(feature.properties['official_name:nan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:it'] !== null ? autolinker.link(feature.properties['official_name:it'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:fr'] !== null ? autolinker.link(feature.properties['official_name:fr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:eu'] !== null ? autolinker.link(feature.properties['official_name:eu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:es'] !== null ? autolinker.link(feature.properties['official_name:es'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:en'] !== null ? autolinker.link(feature.properties['official_name:en'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:de'] !== null ? autolinker.link(feature.properties['official_name:de'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:da'] !== null ? autolinker.link(feature.properties['official_name:da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:cs'] !== null ? autolinker.link(feature.properties['official_name:cs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:ceb'] !== null ? autolinker.link(feature.properties['official_name:ceb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name:ca'] !== null ? autolinker.link(feature.properties['official_name:ca'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date'] !== null ? autolinker.link(feature.properties['date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place'] !== null ? autolinker.link(feature.properties['place'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:zh-Hant'] !== null ? autolinker.link(feature.properties['alt_name:zh-Hant'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:zh-Hans'] !== null ? autolinker.link(feature.properties['alt_name:zh-Hans'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wikipedia:de'] !== null ? autolinker.link(feature.properties['wikipedia:de'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['old_division_code'] !== null ? autolinker.link(feature.properties['old_division_code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['postal_code'] !== null ? autolinker.link(feature.properties['postal_code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:war'] !== null ? autolinker.link(feature.properties['name:war'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:pam'] !== null ? autolinker.link(feature.properties['name:pam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ceb'] !== null ? autolinker.link(feature.properties['name:ceb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wikimedia_commons'] !== null ? autolinker.link(feature.properties['wikimedia_commons'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nickname'] !== null ? autolinker.link(feature.properties['nickname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['old_name:zh'] !== null ? autolinker.link(feature.properties['old_name:zh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:uk'] !== null ? autolinker.link(feature.properties['alt_name:uk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:vi'] !== null ? autolinker.link(feature.properties['alt_name:vi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:ru'] !== null ? autolinker.link(feature.properties['alt_name:ru'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['old_name'] !== null ? autolinker.link(feature.properties['old_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['source:population'] !== null ? autolinker.link(feature.properties['source:population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['old_name:en'] !== null ? autolinker.link(feature.properties['old_name:en'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:zh-Latn-pinyin'] !== null ? autolinker.link(feature.properties['name:zh-Latn-pinyin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:zh'] !== null ? autolinker.link(feature.properties['alt_name:zh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sm'] !== null ? autolinker.link(feature.properties['name:sm'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:bs'] !== null ? autolinker.link(feature.properties['name:bs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['note:population'] !== null ? autolinker.link(feature.properties['note:population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:xmf'] !== null ? autolinker.link(feature.properties['name:xmf'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:wuu'] !== null ? autolinker.link(feature.properties['name:wuu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:wo'] !== null ? autolinker.link(feature.properties['name:wo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:tn'] !== null ? autolinker.link(feature.properties['name:tn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sq'] !== null ? autolinker.link(feature.properties['name:sq'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sat'] !== null ? autolinker.link(feature.properties['name:sat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sah'] !== null ? autolinker.link(feature.properties['name:sah'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:pnb'] !== null ? autolinker.link(feature.properties['name:pnb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:pa'] !== null ? autolinker.link(feature.properties['name:pa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ny'] !== null ? autolinker.link(feature.properties['name:ny'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:my'] !== null ? autolinker.link(feature.properties['name:my'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:mi'] !== null ? autolinker.link(feature.properties['name:mi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:lzh'] !== null ? autolinker.link(feature.properties['name:lzh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ky'] !== null ? autolinker.link(feature.properties['name:ky'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:kw'] !== null ? autolinker.link(feature.properties['name:kw'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ko_hanja'] !== null ? autolinker.link(feature.properties['name:ko_hanja'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:kl'] !== null ? autolinker.link(feature.properties['name:kl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ki'] !== null ? autolinker.link(feature.properties['name:ki'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ie'] !== null ? autolinker.link(feature.properties['name:ie'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:hak'] !== null ? autolinker.link(feature.properties['name:hak'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ha'] !== null ? autolinker.link(feature.properties['name:ha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:chy'] !== null ? autolinker.link(feature.properties['name:chy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:cdo'] !== null ? autolinker.link(feature.properties['name:cdo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:bm'] !== null ? autolinker.link(feature.properties['name:bm'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ba'] !== null ? autolinker.link(feature.properties['name:ba'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:arz'] !== null ? autolinker.link(feature.properties['name:arz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:am'] !== null ? autolinker.link(feature.properties['name:am'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:eo'] !== null ? autolinker.link(feature.properties['alt_name:eo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:en'] !== null ? autolinker.link(feature.properties['alt_name:en'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:tt'] !== null ? autolinker.link(feature.properties['name:tt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:nan'] !== null ? autolinker.link(feature.properties['name:nan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ml'] !== null ? autolinker.link(feature.properties['name:ml'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:kn'] !== null ? autolinker.link(feature.properties['name:kn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:kk'] !== null ? autolinker.link(feature.properties['name:kk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:is'] !== null ? autolinker.link(feature.properties['name:is'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:gl'] !== null ? autolinker.link(feature.properties['name:gl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:bh'] !== null ? autolinker.link(feature.properties['name:bh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:az'] !== null ? autolinker.link(feature.properties['name:az'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:hr'] !== null ? autolinker.link(feature.properties['alt_name:hr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name:cs'] !== null ? autolinker.link(feature.properties['alt_name:cs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wikipedia'] !== null ? autolinker.link(feature.properties['wikipedia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wikidata'] !== null ? autolinker.link(feature.properties['wikidata'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['short_name'] !== null ? autolinker.link(feature.properties['short_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ref:zh-Hant'] !== null ? autolinker.link(feature.properties['ref:zh-Hant'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ref:zh-Hans'] !== null ? autolinker.link(feature.properties['ref:zh-Hans'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ref:zh'] !== null ? autolinker.link(feature.properties['ref:zh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ref:en'] !== null ? autolinker.link(feature.properties['ref:en'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ref'] !== null ? autolinker.link(feature.properties['ref'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['population:date'] !== null ? autolinker.link(feature.properties['population:date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['population'] !== null ? autolinker.link(feature.properties['population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['official_name'] !== null ? autolinker.link(feature.properties['official_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:zh_pinyin'] !== null ? autolinker.link(feature.properties['name:zh_pinyin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:zh-Hant'] !== null ? autolinker.link(feature.properties['name:zh-Hant'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:zh-Hans'] !== null ? autolinker.link(feature.properties['name:zh-Hans'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:zh'] !== null ? autolinker.link(feature.properties['name:zh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:za'] !== null ? autolinker.link(feature.properties['name:za'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:yue'] !== null ? autolinker.link(feature.properties['name:yue'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:wa'] !== null ? autolinker.link(feature.properties['name:wa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:vi'] !== null ? autolinker.link(feature.properties['name:vi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:uz'] !== null ? autolinker.link(feature.properties['name:uz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ur'] !== null ? autolinker.link(feature.properties['name:ur'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:uk'] !== null ? autolinker.link(feature.properties['name:uk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ug'] !== null ? autolinker.link(feature.properties['name:ug'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:tr'] !== null ? autolinker.link(feature.properties['name:tr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:tl'] !== null ? autolinker.link(feature.properties['name:tl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:th'] !== null ? autolinker.link(feature.properties['name:th'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:tg'] !== null ? autolinker.link(feature.properties['name:tg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ta'] !== null ? autolinker.link(feature.properties['name:ta'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sw'] !== null ? autolinker.link(feature.properties['name:sw'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sv'] !== null ? autolinker.link(feature.properties['name:sv'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sr'] !== null ? autolinker.link(feature.properties['name:sr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:sk'] !== null ? autolinker.link(feature.properties['name:sk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ru'] !== null ? autolinker.link(feature.properties['name:ru'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ro'] !== null ? autolinker.link(feature.properties['name:ro'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:qu'] !== null ? autolinker.link(feature.properties['name:qu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:pt'] !== null ? autolinker.link(feature.properties['name:pt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:pl'] !== null ? autolinker.link(feature.properties['name:pl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:os'] !== null ? autolinker.link(feature.properties['name:os'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:oc'] !== null ? autolinker.link(feature.properties['name:oc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:no'] !== null ? autolinker.link(feature.properties['name:no'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:nn'] !== null ? autolinker.link(feature.properties['name:nn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:nl'] !== null ? autolinker.link(feature.properties['name:nl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ms'] !== null ? autolinker.link(feature.properties['name:ms'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:mr'] !== null ? autolinker.link(feature.properties['name:mr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:mn'] !== null ? autolinker.link(feature.properties['name:mn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:mg'] !== null ? autolinker.link(feature.properties['name:mg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:lv'] !== null ? autolinker.link(feature.properties['name:lv'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:lt'] !== null ? autolinker.link(feature.properties['name:lt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:la'] !== null ? autolinker.link(feature.properties['name:la'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ko'] !== null ? autolinker.link(feature.properties['name:ko'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:kg'] !== null ? autolinker.link(feature.properties['name:kg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ka'] !== null ? autolinker.link(feature.properties['name:ka'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ja'] !== null ? autolinker.link(feature.properties['name:ja'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:it'] !== null ? autolinker.link(feature.properties['name:it'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:id'] !== null ? autolinker.link(feature.properties['name:id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ia'] !== null ? autolinker.link(feature.properties['name:ia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:hy'] !== null ? autolinker.link(feature.properties['name:hy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:hu'] !== null ? autolinker.link(feature.properties['name:hu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:hr'] !== null ? autolinker.link(feature.properties['name:hr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:hi'] !== null ? autolinker.link(feature.properties['name:hi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:he'] !== null ? autolinker.link(feature.properties['name:he'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:gv'] !== null ? autolinker.link(feature.properties['name:gv'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ga'] !== null ? autolinker.link(feature.properties['name:ga'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:fr'] !== null ? autolinker.link(feature.properties['name:fr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:fi'] !== null ? autolinker.link(feature.properties['name:fi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:fa'] !== null ? autolinker.link(feature.properties['name:fa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:eu'] !== null ? autolinker.link(feature.properties['name:eu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:et'] !== null ? autolinker.link(feature.properties['name:et'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:es'] !== null ? autolinker.link(feature.properties['name:es'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:eo'] !== null ? autolinker.link(feature.properties['name:eo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:en'] !== null ? autolinker.link(feature.properties['name:en'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:el'] !== null ? autolinker.link(feature.properties['name:el'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:de'] !== null ? autolinker.link(feature.properties['name:de'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:da'] !== null ? autolinker.link(feature.properties['name:da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:cy'] !== null ? autolinker.link(feature.properties['name:cy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:cs'] !== null ? autolinker.link(feature.properties['name:cs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ce'] !== null ? autolinker.link(feature.properties['name:ce'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ca'] !== null ? autolinker.link(feature.properties['name:ca'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:br'] !== null ? autolinker.link(feature.properties['name:br'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:bo'] !== null ? autolinker.link(feature.properties['name:bo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:bn'] !== null ? autolinker.link(feature.properties['name:bn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:bg'] !== null ? autolinker.link(feature.properties['name:bg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:be'] !== null ? autolinker.link(feature.properties['name:be'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:ar'] !== null ? autolinker.link(feature.properties['name:ar'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name:af'] !== null ? autolinker.link(feature.properties['name:af'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['is_in:country_code'] !== null ? autolinker.link(feature.properties['is_in:country_code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['int_name'] !== null ? autolinker.link(feature.properties['int_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['division_code'] !== null ? autolinker.link(feature.properties['division_code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_ref'] !== null ? autolinker.link(feature.properties['alt_ref'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_name'] !== null ? autolinker.link(feature.properties['alt_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['admin_level'] !== null ? autolinker.link(feature.properties['admin_level'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ISO3166-2'] !== null ? autolinker.link(feature.properties['ISO3166-2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__2_0() {
+            return {
+                pane: 'pane__2',
+                opacity: 1,
+                color: 'rgba(128,58,58,0.554)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 8.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane__2');
+        map.getPane('pane__2').style.zIndex = 402;
+        map.getPane('pane__2').style['mix-blend-mode'] = 'normal';
+        var layer__2 = new L.geoJson(json__2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json__2',
+            layerName: 'layer__2',
+            pane: 'pane__2',
+            onEachFeature: pop__2,
+            style: style__2_0,
+        });
+        bounds_group.addLayer(layer__2);
+        map.addLayer(layer__2);
+        function pop__3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">站点名</th>\
+                        <td>' + (feature.properties['站点名'] !== null ? autolinker.link(feature.properties['站点名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">地址</th>\
+                        <td>' + (feature.properties['地址'] !== null ? autolinker.link(feature.properties['地址'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">gcj02_lng</th>\
+                        <td>' + (feature.properties['gcj02_lng'] !== null ? autolinker.link(feature.properties['gcj02_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">gcj02_lat</th>\
+                        <td>' + (feature.properties['gcj02_lat'] !== null ? autolinker.link(feature.properties['gcj02_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">wgs84_lng</th>\
+                        <td>' + (feature.properties['wgs84_lng'] !== null ? autolinker.link(feature.properties['wgs84_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">wgs84_lat</th>\
+                        <td>' + (feature.properties['wgs84_lat'] !== null ? autolinker.link(feature.properties['wgs84_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">电话</th>\
+                        <td>' + (feature.properties['电话'] !== null ? autolinker.link(feature.properties['电话'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">区县</th>\
+                        <td>' + (feature.properties['区县'] !== null ? autolinker.link(feature.properties['区县'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__3_0() {
+            return {
+                pane: 'pane__3',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/gas.svg',
+            iconSize: [15.2, 15.2]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__3');
+        map.getPane('pane__3').style.zIndex = 403;
+        map.getPane('pane__3').style['mix-blend-mode'] = 'normal';
+        var layer__3 = new L.geoJson(json__3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__3',
+            layerName: 'layer__3',
+            pane: 'pane__3',
+            onEachFeature: pop__3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer__3);
+        map.addLayer(layer__3);
+        function pop__4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">站点名</th>\
+                        <td>' + (feature.properties['站点名'] !== null ? autolinker.link(feature.properties['站点名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">地址</th>\
+                        <td>' + (feature.properties['地址'] !== null ? autolinker.link(feature.properties['地址'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gcj02_lng'] !== null ? autolinker.link(feature.properties['gcj02_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gcj02_lat'] !== null ? autolinker.link(feature.properties['gcj02_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wgs84_lng'] !== null ? autolinker.link(feature.properties['wgs84_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wgs84_lat'] !== null ? autolinker.link(feature.properties['wgs84_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">电话</th>\
+                        <td>' + (feature.properties['电话'] !== null ? autolinker.link(feature.properties['电话'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">区县</th>\
+                        <td>' + (feature.properties['区县'] !== null ? autolinker.link(feature.properties['区县'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__4_0() {
+            return {
+                pane: 'pane__4',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/道达尔.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__4');
+        map.getPane('pane__4').style.zIndex = 404;
+        map.getPane('pane__4').style['mix-blend-mode'] = 'normal';
+        var layer__4 = new L.geoJson(json__4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__4',
+            layerName: 'layer__4',
+            pane: 'pane__4',
+            onEachFeature: pop__4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer__4);
+        map.addLayer(layer__4);
+        function pop__5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">name</th>\
+                        <td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">address</th>\
+                        <td>' + (feature.properties['address'] !== null ? autolinker.link(feature.properties['address'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">gcj02_lng</th>\
+                        <td>' + (feature.properties['gcj02_lng'] !== null ? autolinker.link(feature.properties['gcj02_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">gcj02_lat</th>\
+                        <td>' + (feature.properties['gcj02_lat'] !== null ? autolinker.link(feature.properties['gcj02_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">wgs84_lng</th>\
+                        <td>' + (feature.properties['wgs84_lng'] !== null ? autolinker.link(feature.properties['wgs84_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">wgs84_lat</th>\
+                        <td>' + (feature.properties['wgs84_lat'] !== null ? autolinker.link(feature.properties['wgs84_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tel</th>\
+                        <td>' + (feature.properties['tel'] !== null ? autolinker.link(feature.properties['tel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">adName</th>\
+                        <td>' + (feature.properties['adName'] !== null ? autolinker.link(feature.properties['adName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__5_0() {
+            return {
+                pane: 'pane__5',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/壳牌.svg',
+            iconSize: [19.0, 19.0]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__5');
+        map.getPane('pane__5').style.zIndex = 405;
+        map.getPane('pane__5').style['mix-blend-mode'] = 'normal';
+        var layer__5 = new L.geoJson(json__5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__5',
+            layerName: 'layer__5',
+            pane: 'pane__5',
+            onEachFeature: pop__5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer__5);
+        map.addLayer(layer__5);
+        function pop__6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">站点名</th>\
+                        <td>' + (feature.properties['站点名'] !== null ? autolinker.link(feature.properties['站点名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">地址</th>\
+                        <td>' + (feature.properties['地址'] !== null ? autolinker.link(feature.properties['地址'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">gcj02_lng</th>\
+                        <td>' + (feature.properties['gcj02_lng'] !== null ? autolinker.link(feature.properties['gcj02_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">gcj02_lat</th>\
+                        <td>' + (feature.properties['gcj02_lat'] !== null ? autolinker.link(feature.properties['gcj02_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">wgs84_lng</th>\
+                        <td>' + (feature.properties['wgs84_lng'] !== null ? autolinker.link(feature.properties['wgs84_lng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">wgs84_lat</th>\
+                        <td>' + (feature.properties['wgs84_lat'] !== null ? autolinker.link(feature.properties['wgs84_lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">电话</th>\
+                        <td>' + (feature.properties['电话'] !== null ? autolinker.link(feature.properties['电话'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">区县</th>\
+                        <td>' + (feature.properties['区县'] !== null ? autolinker.link(feature.properties['区县'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__6_0() {
+            return {
+                pane: 'pane__6',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/中国石化.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__6');
+        map.getPane('pane__6').style.zIndex = 406;
+        map.getPane('pane__6').style['mix-blend-mode'] = 'normal';
+        var layer__6 = new L.geoJson(json__6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__6',
+            layerName: 'layer__6',
+            pane: 'pane__6',
+            onEachFeature: pop__6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer__6);
+        map.addLayer(layer__6);
+        function pop__7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">站点代码</th>\
+                        <td>' + (feature.properties['站点代码'] !== null ? autolinker.link(feature.properties['站点代码'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">经度</th>\
+                        <td>' + (feature.properties['经度'] !== null ? autolinker.link(feature.properties['经度'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">纬度</th>\
+                        <td>' + (feature.properties['纬度'] !== null ? autolinker.link(feature.properties['纬度'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">站点名</th>\
+                        <td>' + (feature.properties['站点名'] !== null ? autolinker.link(feature.properties['站点名'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">公司</th>\
+                        <td>' + (feature.properties['公司'] !== null ? autolinker.link(feature.properties['公司'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">性质</th>\
+                        <td>' + (feature.properties['性质'] !== null ? autolinker.link(feature.properties['性质'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__7_0() {
+            return {
+                pane: 'pane__7',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/中国石油.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__7');
+        map.getPane('pane__7').style.zIndex = 407;
+        map.getPane('pane__7').style['mix-blend-mode'] = 'normal';
+        var layer__7 = new L.geoJson(json__7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__7',
+            layerName: 'layer__7',
+            pane: 'pane__7',
+            onEachFeature: pop__7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__7_0(feature));
+            },
+        });
+        var cluster__7 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster__7.addLayer(layer__7);
+
+        bounds_group.addLayer(layer__7);
+        cluster__7.addTo(map);
+        function pop__8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">序号</th>\
+                        <td>' + (feature.properties['序号'] !== null ? autolinker.link(feature.properties['序号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">省份</th>\
+                        <td>' + (feature.properties['省份'] !== null ? autolinker.link(feature.properties['省份'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">企业名称</th>\
+                        <td>' + (feature.properties['企业名称'] !== null ? autolinker.link(feature.properties['企业名称'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">详细地址</th>\
+                        <td>' + (feature.properties['详细地址'] !== null ? autolinker.link(feature.properties['详细地址'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">库容基本情况</th>\
+                        <td>' + (feature.properties['库容基本情况'] !== null ? autolinker.link(feature.properties['库容基本情况'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">备注</th>\
+                        <td>' + (feature.properties['备注'] !== null ? autolinker.link(feature.properties['备注'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['Longitude'] !== null ? autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">简称</th>\
+                        <td>' + (feature.properties['简称'] !== null ? autolinker.link(feature.properties['简称'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">基本情况</th>\
+                        <td>' + (feature.properties['基本情况'] !== null ? autolinker.link(feature.properties['基本情况'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">运输方式</th>\
+                        <td>' + (feature.properties['运输方式'] !== null ? autolinker.link(feature.properties['运输方式'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">备注_1</th>\
+                        <td>' + (feature.properties['备注_1'] !== null ? autolinker.link(feature.properties['备注_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__8_0() {
+            return {
+                pane: 'pane__8',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/中石油油库.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__8');
+        map.getPane('pane__8').style.zIndex = 408;
+        map.getPane('pane__8').style['mix-blend-mode'] = 'normal';
+        var layer__8 = new L.geoJson(json__8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__8',
+            layerName: 'layer__8',
+            pane: 'pane__8',
+            onEachFeature: pop__8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer__8);
+        map.addLayer(layer__8);
+        function pop__9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">序号</th>\
+                        <td>' + (feature.properties['序号'] !== null ? autolinker.link(feature.properties['序号'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">省份</th>\
+                        <td>' + (feature.properties['省份'] !== null ? autolinker.link(feature.properties['省份'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">企业名称</th>\
+                        <td>' + (feature.properties['企业名称'] !== null ? autolinker.link(feature.properties['企业名称'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">详细地址</th>\
+                        <td>' + (feature.properties['详细地址'] !== null ? autolinker.link(feature.properties['详细地址'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">库容基本情况</th>\
+                        <td>' + (feature.properties['库容基本情况'] !== null ? autolinker.link(feature.properties['库容基本情况'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">备注</th>\
+                        <td>' + (feature.properties['备注'] !== null ? autolinker.link(feature.properties['备注'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['Longitude'] !== null ? autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">简称</th>\
+                        <td>' + (feature.properties['简称'] !== null ? autolinker.link(feature.properties['简称'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">基本情况</th>\
+                        <td>' + (feature.properties['基本情况'] !== null ? autolinker.link(feature.properties['基本情况'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">运输方式</th>\
+                        <td>' + (feature.properties['运输方式'] !== null ? autolinker.link(feature.properties['运输方式'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">备注_1</th>\
+                        <td>' + (feature.properties['备注_1'] !== null ? autolinker.link(feature.properties['备注_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__9_0() {
+            return {
+                pane: 'pane__9',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/其他油桶.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane__9');
+        map.getPane('pane__9').style.zIndex = 409;
+        map.getPane('pane__9').style['mix-blend-mode'] = 'normal';
+        var layer__9 = new L.geoJson(json__9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__9',
+            layerName: 'layer__9',
+            pane: 'pane__9',
+            onEachFeature: pop__9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style__9_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer__9);
+        map.addLayer(layer__9);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/_9.png" /> 其他油库': layer__9,'<img src="legend/_8.png" /> 中石油油库': layer__8,'<img src="legend/_7.png" /> 中国石油': cluster__7,'<img src="legend/_6.png" /> 中国石化': layer__6,'<img src="legend/_5.png" /> 壳牌': layer__5,'<img src="legend/_4.png" /> 道达尔': layer__4,'<img src="legend/_3.png" /> 其他品牌': layer__3,'<img src="legend/_2.png" /> 重庆边界': layer__2,'<img src="legend/_1.png" /> 主城边界': layer__1,"地图": layer__0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer__8.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['企业名称'] !== null?String('<div style="color: #323232; font-size: 3pt; font-weight: bold; font-family: \'DengXian\', sans-serif;">' + layer.feature.properties['企业名称']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css__8'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer__9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['企业名称'] !== null?String('<div style="color: #323232; font-size: 3pt; font-weight: bold; font-family: \'DengXian\', sans-serif;">' + layer.feature.properties['企业名称']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css__9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer__8,layer__9]);
+        map.on("zoomend", function(){
+            resetLabels([layer__8,layer__9]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer__8,layer__9]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer__8,layer__9]);
+        });
+        </script>
+    </body>
+</html>
