@@ -8,6 +8,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
@@ -34,6 +36,7 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
         <script src="data/copy_1.js"></script>
         <script>
         var map = L.map('map', {
@@ -113,7 +116,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(219,30,42,1.0)',
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_copy_1');
@@ -121,7 +124,7 @@
         map.getPane('pane_copy_1').style['mix-blend-mode'] = 'normal';
         var layer_copy_1 = new L.geoJson(json_copy_1, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_copy_1',
             layerName: 'layer_copy_1',
             pane: 'pane_copy_1',
@@ -134,8 +137,12 @@
                 return L.circleMarker(latlng, style_copy_1_0(feature));
             },
         });
+        var cluster_copy_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_copy_1.addLayer(layer_copy_1);
+
         bounds_group.addLayer(layer_copy_1);
-        map.addLayer(layer_copy_1);
+        cluster_copy_1.addTo(map);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -147,7 +154,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/copy_1.png" /> 中国石油 copy': layer_copy_1,"地图": layer__0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/copy_1.png" /> 中国石油 copy': cluster_copy_1,"地图": layer__0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
