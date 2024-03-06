@@ -1,6 +1,6 @@
-var json_copy_5 = {
+var json_copy_0 = {
 "type": "FeatureCollection",
-"name": "copy_5",
+"name": "copy_0",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "站点代码": "NA32", "经度": 106.44015, "纬度": 29.47271, "站点名": "九龙坡中梁山站", "公司": "渝中", "性质": "全资" }, "geometry": { "type": "Point", "coordinates": [ 106.433741190554102, 29.466407015990715 ] } },
